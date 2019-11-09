@@ -1,11 +1,12 @@
 import numpy as np
 import pandas as pd
 
+from utils import get_mail_dump_path
+
 
 class MailDumpOps:
     def __init__(self):
-        # TODO: Make this mail dump in home directory
-        self.df = pd.DataFrame(pd.read_pickle("mail_dump")).transpose()
+        self.df = pd.DataFrame(pd.read_pickle(get_mail_dump_path())).transpose()
         self.df['from_sender'] = np.nan
         self.df['from_sender'] = self.df.apply(MailDumpOps.get_from_sender, axis=1)
         # TODO: get un-subscribe link here

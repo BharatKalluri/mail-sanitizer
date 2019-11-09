@@ -6,6 +6,8 @@ import requests
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+from utils import get_config_dir
+
 SCOPES = ['https://mail.google.com/']
 
 
@@ -17,18 +19,19 @@ class GmailClient:
 
     def get_token(self):
         creds = None
-        # TODO: Make the token, credentials.json and the pickle in a folder called ~/.mail_sanitizer
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
+        token_pickle_path = os.path.join(get_config_dir(), 'token.pickle')
+        creds_path = os.path.join(get_config_dir(), 'credentials.json')
+        if os.path.exists(token_pickle_path):
+            with open(token_pickle_path, 'rb') as token:
                 creds = pickle.load(token)
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
+                    creds_path, SCOPES)
                 creds = flow.run_local_server(port=0)
-                with open('token.pickle', 'wb') as token:
+                with open(token_pickle_path, 'wb') as token:
                     pickle.dump(creds, token)
         self.token = creds.token
 

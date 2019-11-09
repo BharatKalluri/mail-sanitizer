@@ -5,6 +5,7 @@ import pickle
 import aiohttp
 
 from clients.gmail_client import GmailClient
+from utils import get_mail_dump_path
 
 gmail_client = GmailClient()
 
@@ -13,7 +14,6 @@ async def get_all_emails(messages):
     all_messages_content = {}
     loop = asyncio.get_running_loop()
     async with aiohttp.ClientSession(loop=loop) as client:
-        print("Getting email")
         await asyncio.gather(
             *(gmail_client.store_mail_resp(msg['id'], all_messages_content, client) for msg in messages)
         )
@@ -34,7 +34,7 @@ def create_mail_dump(q: str, user_id):
     print("Getting all your emails contents")
     messages_content = asyncio.run(get_all_emails(all_messages))
     print("Creating a dump with the data we have now")
-    dump_mail_data('mail_dump', messages_content, True)
+    dump_mail_data(get_mail_dump_path(), messages_content, True)
     print("Dump created")
 
 
