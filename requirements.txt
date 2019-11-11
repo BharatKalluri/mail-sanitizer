@@ -3,3 +3,4 @@ pandas
 requests
 numpy
 google-auth
+click==7.0

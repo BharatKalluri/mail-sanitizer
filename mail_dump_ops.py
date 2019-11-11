@@ -14,10 +14,11 @@ class MailDumpOps:
     @staticmethod
     def get_from_sender(row):
         payload = row.payload
-        headers = payload.get('headers')
-        filtered_from_sender = list(filter(lambda x: x['name'] == 'From', headers))
-        if filtered_from_sender:
-            return filtered_from_sender[0]['value']
+        if payload and isinstance(payload, dict):
+            headers = payload.get('headers')
+            filtered_from_sender = list(filter(lambda x: x['name'] == 'From', headers))
+            if filtered_from_sender:
+                return filtered_from_sender[0]['value']
 
     def get_top_senders(self):
         return list(self.df.from_sender.value_counts().index)

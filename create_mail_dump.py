@@ -29,15 +29,10 @@ def dump_mail_data(file_name, obj, overwrite=False):
 
 
 def create_mail_dump(q: str, user_id):
-    print("Getting all your emails metadata")
+    print("Getting all your emails metadata, this might take a while based on the size of your inbox. "
+          "Go grab a coffee :)")
     all_messages = gmail_client.get_messages_for_q(q, user_id)
     print("Getting all your emails contents")
     messages_content = asyncio.run(get_all_emails(all_messages))
-    print("Creating a dump with the data we have now")
     dump_mail_data(get_mail_dump_path(), messages_content, True)
-    print("Dump created")
-
-
-# Create a mail dump with everything in existence
-if __name__ == "__main__":
-    create_mail_dump("", "kalluribharat@gmail.com")
+    print("Collected all emails, run sanitize to clean up your inbox!")
