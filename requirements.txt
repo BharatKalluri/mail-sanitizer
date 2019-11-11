@@ -1,3 +1,4 @@
+PyYAML
 aiohttp
 pandas
 requests

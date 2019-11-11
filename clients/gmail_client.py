@@ -21,6 +21,9 @@ class GmailClient:
         creds = None
         token_pickle_path = os.path.join(get_config_dir(), 'token.pickle')
         creds_path = os.path.join(get_config_dir(), 'credentials.json')
+        if not os.path.exists(creds_path):
+            print("Please download your credentials.json and put it in the config folder")
+            exit(1)
         if os.path.exists(token_pickle_path):
             with open(token_pickle_path, 'rb') as token:
                 creds = pickle.load(token)
@@ -63,8 +66,8 @@ class GmailClient:
             messages.extend(response['messages'])
         return messages
 
-    async def store_mail_resp(self, msg_id, map_to_store_in, client):
-        g_url = f"https://www.googleapis.com/gmail/v1/users/kalluribharat@gmail.com/messages/{msg_id}"
+    async def store_mail_resp(self, user_id, msg_id, map_to_store_in, client):
+        g_url = f"https://www.googleapis.com/gmail/v1/users/{user_id}/messages/{msg_id}"
         async with client.get(g_url, headers=self.get_headers()) as response:
             response = await response.read()
             map_to_store_in[msg_id] = json.loads(response)
