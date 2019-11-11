@@ -6,6 +6,7 @@ import click
 
 @click.group()
 def cli():
+    # TODO: Read data from config here
     pass
 
 
@@ -17,9 +18,9 @@ def sanitize():
     for sender in top_senders:
         emails_ids = mail_dump_ops.get_message_ids(sender)
         print(f"You have {len(emails_ids)} messages from {sender}, "
-              f"do you want to delete all messages from these senders? (y/n)")
+              f"do you want to delete all messages from these senders? (y/n) ", end="")
         should_del = str(input())
-        if should_del[0] == 'y':
+        if should_del and should_del[0] == 'y':
             # TODO: Get email from config
             gmail_client.del_emails_with_id(emails_ids, "kalluribharat@gmail.com")
             print(f"Deleted {len(emails_ids)} emails!")
