@@ -10,7 +10,7 @@ The idea of this tool is to analyze emails, find and unsubscribe link and open i
 
 - Go to https://developers.google.com/gmail/api/quickstart/python and click on Enable Gmail API
 
-- Click on Download client configuration and copy the file over to ~/.config/mail_sanitizer/credentials.json
+- Click on Download client configuration and copy the file over to ~/.config/mail-sanitizer/credentials.json
 
 ### Usage
 

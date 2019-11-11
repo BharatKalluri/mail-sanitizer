@@ -5,7 +5,7 @@ import yaml
 
 def get_config_dir():
     home_dir = os.path.expanduser('~')
-    return os.path.join(home_dir, ".config", "mail_sanitizer")
+    return os.path.join(home_dir, ".config", "mail-sanitizer")
 
 
 def get_config_file_path():
