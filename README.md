@@ -12,6 +12,11 @@ The idea of this tool is to analyze emails, find and unsubscribe link and open i
 
 - Click on Download client configuration and copy the file over to ~/.config/mail-sanitizer/credentials.json
 
+- Create a file called config.yaml in the same directory with the following contents
+```yaml
+email: <your email here>
+```
+
 ### Usage
 
 `mail-sanatizer collect`: Will create a mail dump for the sanitizer to operate on
@@ -24,3 +29,5 @@ The idea of this tool is to analyze emails, find and unsubscribe link and open i
  You have recieved 234 emails from yyy@yyy.com, do you want to delete all these emails?
  ....
 ```
+
+Feel free to file issues if you face any problems or add suggestions in the github issues.
