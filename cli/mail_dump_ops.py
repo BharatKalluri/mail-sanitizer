@@ -5,7 +5,7 @@ import asyncio
 import os
 import pickle
 
-from utils import get_mail_dump_path
+from cli.utils import get_mail_dump_path
 
 
 async def get_all_emails(user_id, messages, mail_client):

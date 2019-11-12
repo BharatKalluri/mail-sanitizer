@@ -5,3 +5,4 @@ requests
 numpy
 google-auth
 click==7.0
+google-auth-oauthlib
