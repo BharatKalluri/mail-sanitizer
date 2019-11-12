@@ -1,8 +1,8 @@
-from clients.gmail_client import GmailClient
-from mail_dump_ops import MailDumpOps
+from cli.clients.gmail_client import GmailClient
+from cli.mail_dump_ops import MailDumpOps
 import click
 
-from utils import create_config_path, get_prop_from_config
+from cli.utils import create_config_path, get_prop_from_config
 
 create_config_path()
 
@@ -34,6 +34,10 @@ def collect():
     gmail_client = GmailClient()
     user_email = get_prop_from_config("email")
     MailDumpOps.create_mail_dump("", user_email, gmail_client)
+
+
+def main():
+    cli()
 
 
 if __name__ == "__main__":
