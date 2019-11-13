@@ -14,7 +14,8 @@ def cli():
 
 @cli.command()
 def sanitize():
-    # TODO: Notify if mail dump does not exist, ask to run collect
+    if not MailDumpOps.does_dump_exist():
+        print("Please run mail-sanitizer collect before you run sanitize")
     user_email = get_prop_from_config("email")
     mail_client = GmailClient()
     mail_dump_ops = MailDumpOps()
@@ -34,6 +35,11 @@ def sanitize():
 
 @cli.command()
 def collect():
+    if MailDumpOps.does_dump_exist():
+        print("Mails are already collected, do you want to overwrite? (y/n)")
+        decision = str(input())
+        if decision and decision.lower()[0] == 'n':
+            exit(0)
     # Create a mail dump with everything in existence
     gmail_client = GmailClient()
     user_email = get_prop_from_config("email")
