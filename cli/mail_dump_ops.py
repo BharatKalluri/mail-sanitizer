@@ -88,6 +88,7 @@ class MailDumpOps:
     def get_un_sub_link(self, sender: str) -> str:
         un_sub_links = set_flatten(list(self.df[self.df.from_sender == sender]['un_subscribe_links']))
         if un_sub_links:
-            filtered_un_sub_links = list(filter(lambda x: x is not None, un_sub_links))
+            # TODO: Think what to do with mailto links
+            filtered_un_sub_links = list(filter(lambda x: ((x is not None) and ('mailto' not in x)), un_sub_links))
             if filtered_un_sub_links and any(filtered_un_sub_links):
                 return filtered_un_sub_links[0]
