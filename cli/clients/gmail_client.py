@@ -10,6 +10,8 @@ from cli.utils import get_config_dir
 
 SCOPES = ['https://mail.google.com/']
 
+CREDENTIALS_GET_URL = "https://developers.google.com/gmail/api/quickstart/python"
+
 
 class GmailClient:
 
@@ -22,7 +24,7 @@ class GmailClient:
         token_pickle_path = os.path.join(get_config_dir(), 'token.pickle')
         creds_path = os.path.join(get_config_dir(), 'credentials.json')
         if not os.path.exists(creds_path):
-            print("Please download your credentials.json and put it in the config folder")
+            print(f"Please download your credentials.json from {CREDENTIALS_GET_URL} and put it in the config folder")
             exit(1)
         if os.path.exists(token_pickle_path):
             with open(token_pickle_path, 'rb') as token:
