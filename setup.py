@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mail-sanitizer',
-    version='0.0.3',
+    version='0.0.4',
     license="GPLv3",
     description="A cli tool to clean up your email",
     url="https://github.com/BharatKalluri/mail-sanitizer",
