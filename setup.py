@@ -6,12 +6,12 @@ setup(
     license="GPLv3",
     description="A cli tool to clean up your email",
     url="https://github.com/BharatKalluri/mail-sanitizer",
-    packages=['cli'],
+    packages=['mail_sanitizer'],
     install_requires=["PyYAML", "aiohttp", "pandas", "requests", "numpy", "google-auth", "click",
                       "google-auth-oauthlib"],
     entry_points={
         'console_scripts': [
-            'mail-sanitizer = cli.main:main'
+            'mail-sanitizer = mail_sanitizer.main:main'
         ]
     },
     python_requires=">= 3.7",

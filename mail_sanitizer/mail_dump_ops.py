@@ -7,7 +7,7 @@ import asyncio
 import os
 import pickle
 
-from cli.utils import get_mail_dump_path
+from mail_sanitizer.utils import get_mail_dump_path
 
 
 def set_flatten(arr):

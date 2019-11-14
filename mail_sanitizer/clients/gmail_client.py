@@ -6,7 +6,7 @@ import requests
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-from cli.utils import get_config_dir
+from mail_sanitizer.utils import get_config_dir
 
 SCOPES = ['https://mail.google.com/']
 
