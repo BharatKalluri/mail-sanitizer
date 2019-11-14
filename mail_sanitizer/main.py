@@ -1,8 +1,8 @@
-from cli.clients.gmail_client import GmailClient
-from cli.mail_dump_ops import MailDumpOps
+from mail_sanitizer.clients.gmail_client import GmailClient
+from mail_sanitizer.mail_dump_ops import MailDumpOps
 import click
 
-from cli.utils import create_config_path, get_prop_from_config
+from mail_sanitizer.utils import create_config_path, get_prop_from_config
 
 create_config_path()
 
@@ -28,7 +28,7 @@ def sanitize():
         if should_del and should_del[0] == 'y':
             mail_client.del_emails_with_id(emails_ids, user_email)
             print(f"Deleted {len(emails_ids)} emails!")
-        # TODO: Better format cli and educate people about how mailto for un sub works
+        # TODO: Better format mail_sanitizer and educate people about how mailto for un sub works
         if un_sub_links:
             print(f"Unsubscribe links: {un_sub_links}")
 
