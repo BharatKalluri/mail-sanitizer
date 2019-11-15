@@ -1,5 +1,5 @@
 from mail_sanitizer.clients.gmail_client import GmailClient
-from mail_sanitizer.mail_dump_ops import MailDumpOps
+from mail_sanitizer.mail_dump_ops import MailDumpOps, collect_emails
 import click
 
 from mail_sanitizer.utils import create_config_path, get_prop_from_config
@@ -13,11 +13,8 @@ def cli():
 
 
 @cli.command()
-@click.option('--use-cache/--no-cache', default=True)
-def sanitize(use_cache):
-    if not MailDumpOps.does_dump_exist() or not use_cache:
-        print("Collecting metadata of all emails")
-        collect()
+def sanitize():
+    collect_emails()
     user_email = get_prop_from_config("email")
     mail_client = GmailClient()
     mail_dump_ops = MailDumpOps()
@@ -33,16 +30,6 @@ def sanitize(use_cache):
         # TODO: Better format mail_sanitizer and educate people about how mailto for un sub works
         if un_sub_links:
             print(f"Unsubscribe links: {un_sub_links}")
-
-
-def collect():
-    # Create a mail dump with everything in existence
-    gmail_client = GmailClient()
-    user_email = get_prop_from_config("email")
-    print("Getting all your emails metadata, this might take a while based on the size of your inbox. "
-          "Go grab a coffee :)")
-    MailDumpOps.create_mail_dump("", user_email, gmail_client)
-    print("Collected all emails, run sanitize to clean up your inbox!")
 
 
 def main():

@@ -15,17 +15,4 @@ This tool will get all your emails, store it locally and let's you delete emails
 email: <your email here>
 ```
 
-## Usage
-
-`mail-sanatizer collect`: Will create a mail dump for the sanitizer to operate on
-
-`mail-sanatizer sanitize`: starts a series of questions, the questions will be in the form of
-
-```bash
- You have recieved 300 emails from xxx@xxx.com, do you want to delete all these emails?
- y
- You have recieved 234 emails from yyy@yyy.com, do you want to delete all these emails?
- ....
-```
-
 Feel free to file issues if you face any problems or add suggestions in the github issues.

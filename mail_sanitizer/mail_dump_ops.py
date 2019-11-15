@@ -7,7 +7,8 @@ import asyncio
 import os
 import pickle
 
-from mail_sanitizer.utils import get_mail_dump_path
+from mail_sanitizer.clients.gmail_client import GmailClient
+from mail_sanitizer.utils import get_mail_dump_path, get_prop_from_config
 
 
 def set_flatten(arr):
@@ -39,6 +40,14 @@ def dump_mail_data(file_name, obj, overwrite=False):
 
 def _sanitize_un_sub_link(link):
     return str(link).strip().replace("\u003c", "").replace("\u003e", "")
+
+
+def collect_emails():
+    # Create a mail dump with everything in existence
+    gmail_client = GmailClient()
+    user_email = get_prop_from_config("email")
+    print("Getting all your emails metadata")
+    MailDumpOps.create_mail_dump("", user_email, gmail_client)
 
 
 class MailDumpOps:
