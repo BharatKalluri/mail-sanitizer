@@ -5,6 +5,11 @@
 If you signup to a lot of websites to get a peek into the product or get on a trial. Then your mail box probably has several thousands of emails.
 This tool will get all your emails, store it locally and let's you delete emails in bulk by sender and provide un-subscribe links if it finds any.
 
+## Install
+```bash
+pip3 install --user mail-sanitizer 
+```
+
 ## One time setup
 
 - Go [here](https://developers.google.com/gmail/api/quickstart/python) and click on Enable Gmail API
