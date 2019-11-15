@@ -27,9 +27,8 @@ def sanitize():
         if should_del and should_del[0] == 'y':
             mail_client.del_emails_with_id(emails_ids, user_email)
             print(f"Deleted {len(emails_ids)} emails!")
-        # TODO: Better format mail_sanitizer and educate people about how mailto for un sub works
         if un_sub_links:
-            print(f"Unsubscribe links: {un_sub_links}")
+            print(f"Unsubscribe link: {un_sub_links}")
 
 
 def main():
