@@ -69,7 +69,7 @@ class GmailClient:
         return messages
 
     async def store_mail_resp(self, user_id, msg_id, map_to_store_in, client):
-        g_url = f"https://www.googleapis.com/gmail/v1/users/{user_id}/messages/{msg_id}"
+        g_url = f"https://www.googleapis.com/gmail/v1/users/{user_id}/messages/{msg_id}?format=metadata"
         async with client.get(g_url, headers=self.get_headers()) as response:
             response = await response.read()
             map_to_store_in[msg_id] = json.loads(response)

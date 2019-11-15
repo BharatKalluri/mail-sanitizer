@@ -13,9 +13,11 @@ def cli():
 
 
 @cli.command()
-def sanitize():
-    if not MailDumpOps.does_dump_exist():
-        print("Please run mail-sanitizer collect before you run sanitize")
+@click.option('--use-cache/--no-cache', default=True)
+def sanitize(use_cache):
+    if not MailDumpOps.does_dump_exist() or not use_cache:
+        print("Collecting metadata of all emails")
+        collect()
     user_email = get_prop_from_config("email")
     mail_client = GmailClient()
     mail_dump_ops = MailDumpOps()
@@ -33,13 +35,7 @@ def sanitize():
             print(f"Unsubscribe links: {un_sub_links}")
 
 
-@cli.command()
 def collect():
-    if MailDumpOps.does_dump_exist():
-        print("Mails are already collected, do you want to overwrite? (y/n)")
-        decision = str(input())
-        if decision and decision.lower()[0] == 'n':
-            exit(0)
     # Create a mail dump with everything in existence
     gmail_client = GmailClient()
     user_email = get_prop_from_config("email")
