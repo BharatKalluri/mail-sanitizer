@@ -1,6 +1,6 @@
 <h1 align="center">Mail sanitizer</h1>
 
-![demo](./Demo.gif)
+[![asciicast](https://asciinema.org/a/aK1y1hcF4DEJVVi16xWiFbgC3.svg)](https://asciinema.org/a/aK1y1hcF4DEJVVi16xWiFbgC3)
 
 If you signup to a lot of websites to get a peek into the product or get on a trial. Then your mail box probably has several thousands of emails.
 This tool will get all your emails, store it locally and let's you delete emails in bulk by sender and provide un-subscribe links if it finds any.

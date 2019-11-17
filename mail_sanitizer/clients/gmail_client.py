@@ -66,7 +66,8 @@ class GmailClient:
                 params={"pageToken": page_token}
             )
             response = r.json()
-            messages.extend(response['messages'])
+            if response.get('messages'):
+                messages.extend(response['messages'])
         return messages
 
     async def store_mail_resp(self, user_id, msg_id, map_to_store_in, client):
