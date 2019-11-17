@@ -1,4 +1,4 @@
-# Mail sanitizer
+<h1 align="center">Mail sanitizer</h1>
 
 ![demo](./Demo.gif)
 
