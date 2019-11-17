@@ -7,7 +7,10 @@ import asyncio
 import os
 import pickle
 
-from mail_sanitizer.utils import get_mail_dump_path
+from halo import Halo
+
+from mail_sanitizer.clients.gmail_client import GmailClient
+from mail_sanitizer.utils import get_mail_dump_path, get_prop_from_config
 
 
 def set_flatten(arr):
@@ -32,13 +35,20 @@ async def get_all_emails(user_id, messages, mail_client):
 def dump_mail_data(file_name, obj, overwrite=False):
     if os.path.exists(file_name) and not overwrite:
         return
-    dump = open(file_name, 'ab')
+    dump = open(file_name, 'wb')
     pickle.dump(obj, dump)
     dump.close()
 
 
 def _sanitize_un_sub_link(link):
     return str(link).strip().replace("\u003c", "").replace("\u003e", "")
+
+
+def collect_emails():
+    # Create a mail dump with everything in existence
+    gmail_client = GmailClient()
+    user_email = get_prop_from_config("email")
+    MailDumpOps.create_mail_dump("", user_email, gmail_client)
 
 
 class MailDumpOps:
@@ -53,9 +63,9 @@ class MailDumpOps:
         return os.path.exists(get_mail_dump_path())
 
     @staticmethod
+    @Halo(text='Collecting metadata of all your mails', spinner='dots')
     def create_mail_dump(q: str, user_id: str, mail_client):
         all_messages = mail_client.get_messages_for_q(q, user_id)
-        print("Getting all your emails contents")
         messages_content = asyncio.run(get_all_emails(user_id, all_messages, mail_client))
         dump_mail_data(get_mail_dump_path(), messages_content, True)
 

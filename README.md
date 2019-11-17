@@ -1,7 +1,15 @@
 # Mail sanitizer
 
+![demo](./demo.webm)
+
 If you signup to a lot of websites to get a peek into the product or get on a trial. Then your mail box probably has several thousands of emails.
 This tool will get all your emails, store it locally and let's you delete emails in bulk by sender and provide un-subscribe links if it finds any.
+
+## Install
+
+```bash
+pip3 install --user mail-sanitizer
+```
 
 ## One time setup
 
@@ -13,19 +21,6 @@ This tool will get all your emails, store it locally and let's you delete emails
 
 ```yaml
 email: <your email here>
-```
-
-## Usage
-
-`mail-sanatizer collect`: Will create a mail dump for the sanitizer to operate on
-
-`mail-sanatizer sanitize`: starts a series of questions, the questions will be in the form of
-
-```bash
- You have recieved 300 emails from xxx@xxx.com, do you want to delete all these emails?
- y
- You have recieved 234 emails from yyy@yyy.com, do you want to delete all these emails?
- ....
 ```
 
 Feel free to file issues if you face any problems or add suggestions in the github issues.

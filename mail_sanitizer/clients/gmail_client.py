@@ -5,6 +5,7 @@ import pickle
 import requests
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
+from halo import Halo
 
 from mail_sanitizer.utils import get_config_dir
 
@@ -69,16 +70,20 @@ class GmailClient:
         return messages
 
     async def store_mail_resp(self, user_id, msg_id, map_to_store_in, client):
-        g_url = f"https://www.googleapis.com/gmail/v1/users/{user_id}/messages/{msg_id}"
+        g_url = f"https://www.googleapis.com/gmail/v1/users/{user_id}/messages/{msg_id}?format=metadata"
         async with client.get(g_url, headers=self.get_headers()) as response:
             response = await response.read()
             map_to_store_in[msg_id] = json.loads(response)
 
     def del_emails_with_id(self, msg_ids, user_id):
+        spinner = Halo(text='Loading', spinner='dots')
+        spinner.start()
         msg_ids_str = ",".join(["\"" + mid + "\"" for mid in msg_ids])
         batch_del_url = f"https://www.googleapis.com/gmail/v1/users/" + user_id + "/messages/batchDelete"
         payload = "{\"ids\": [" + msg_ids_str + "]}"
         resp = requests.request("POST", batch_del_url, data=payload, headers=self.get_headers())
         if not resp.ok:
             print(resp.text)
-            raise Exception("Deletion has failed")
+            spinner.fail(text="Deletion has failed")
+            return
+        spinner.succeed(text=f"Deleted {len(msg_ids)} emails!")
