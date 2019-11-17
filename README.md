@@ -23,4 +23,8 @@ pip3 install --user mail-sanitizer
 email: <your email here>
 ```
 
+## Usage
+
+- Run `mail-sanitizer sanitize`
+
 Feel free to file issues if you face any problems or add suggestions in the github issues.
