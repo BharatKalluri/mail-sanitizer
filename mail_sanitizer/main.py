@@ -1,7 +1,6 @@
+import click
 from mail_sanitizer.clients.gmail_client import GmailClient
 from mail_sanitizer.mail_dump_ops import MailDumpOps, collect_emails
-import click
-
 from mail_sanitizer.utils import create_config_path, get_prop_from_config
 
 create_config_path()

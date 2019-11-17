@@ -35,7 +35,7 @@ async def get_all_emails(user_id, messages, mail_client):
 def dump_mail_data(file_name, obj, overwrite=False):
     if os.path.exists(file_name) and not overwrite:
         return
-    dump = open(file_name, 'ab')
+    dump = open(file_name, 'wb')
     pickle.dump(obj, dump)
     dump.close()
 
