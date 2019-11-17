@@ -7,6 +7,8 @@ import asyncio
 import os
 import pickle
 
+from halo import Halo
+
 from mail_sanitizer.clients.gmail_client import GmailClient
 from mail_sanitizer.utils import get_mail_dump_path, get_prop_from_config
 
@@ -46,7 +48,6 @@ def collect_emails():
     # Create a mail dump with everything in existence
     gmail_client = GmailClient()
     user_email = get_prop_from_config("email")
-    print("Getting all your emails metadata")
     MailDumpOps.create_mail_dump("", user_email, gmail_client)
 
 
@@ -62,9 +63,9 @@ class MailDumpOps:
         return os.path.exists(get_mail_dump_path())
 
     @staticmethod
+    @Halo(text='Collecting metadata of all your mails', spinner='dots')
     def create_mail_dump(q: str, user_id: str, mail_client):
         all_messages = mail_client.get_messages_for_q(q, user_id)
-        print("Getting all your emails contents")
         messages_content = asyncio.run(get_all_emails(user_id, all_messages, mail_client))
         dump_mail_data(get_mail_dump_path(), messages_content, True)
 

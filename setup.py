@@ -8,7 +8,7 @@ setup(
     url="https://github.com/BharatKalluri/mail-sanitizer",
     packages=find_packages(),
     install_requires=["PyYAML", "aiohttp", "pandas", "requests", "numpy", "google-auth", "click",
-                      "google-auth-oauthlib"],
+                      "google-auth-oauthlib", "halo"],
     entry_points={
         'console_scripts': [
             'mail-sanitizer = mail_sanitizer.main:main'

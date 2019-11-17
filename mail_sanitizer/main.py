@@ -26,7 +26,6 @@ def sanitize():
         should_del = str(input())
         if should_del and should_del[0] == 'y':
             mail_client.del_emails_with_id(emails_ids, user_email)
-            print(f"Deleted {len(emails_ids)} emails!")
         if un_sub_links:
             print(f"Unsubscribe link: {un_sub_links}")
 
