@@ -21,9 +21,9 @@ def sanitize():
     for sender in top_senders:
         emails_ids = mail_dump_ops.get_message_ids(sender)
         un_sub_links = mail_dump_ops.get_un_sub_link(sender)
-        print(f"You have {len(emails_ids)} messages from {sender}, Delete? (y/n) ", end="")
+        print(f"You have {len(emails_ids)} messages from {sender}, Delete? (Y/n) ", end="")
         should_del = str(input())
-        if should_del and should_del[0] == 'y':
+        if (should_del and should_del[0] == 'y') or (not should_del):
             mail_client.del_emails_with_id(emails_ids, user_email)
         if un_sub_links:
             print(f"Unsubscribe link: {un_sub_links}")
