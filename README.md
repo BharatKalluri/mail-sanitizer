@@ -27,12 +27,6 @@ mkdir -p ~/.config/mail-sanitizer
 cp ~/Downloads/config.json ~/.config/mail-sanitizer
 ```
 
-- Create a file called config.yaml in the same directory with the following contents
-
-```shell script
-cat ~/.config/mail-sanitizer/config.yaml
-email: <your email here>
-```
 
 ## Usage
 

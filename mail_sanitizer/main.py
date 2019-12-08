@@ -1,7 +1,8 @@
 import click
+
 from mail_sanitizer.clients.gmail_client import GmailClient
 from mail_sanitizer.mail_dump_ops import MailDumpOps, collect_emails
-from mail_sanitizer.utils import create_config_path, get_prop_from_config
+from mail_sanitizer.utils import create_config_path
 
 create_config_path()
 
@@ -14,7 +15,6 @@ def cli():
 @cli.command()
 def sanitize():
     collect_emails()
-    user_email = get_prop_from_config("email")
     mail_client = GmailClient()
     mail_dump_ops = MailDumpOps()
     top_senders = mail_dump_ops.get_top_senders()
@@ -24,7 +24,7 @@ def sanitize():
         print(f"You have {len(emails_ids)} messages from {sender}, Delete? (Y/n) ", end="")
         should_del = str(input())
         if (should_del and should_del[0] == 'y') or (not should_del):
-            mail_client.del_emails_with_id(emails_ids, user_email)
+            mail_client.del_emails_with_id(emails_ids, 'me')
         if un_sub_links:
             print(f"Unsubscribe link: {un_sub_links}")
 
