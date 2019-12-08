@@ -1,16 +1,15 @@
+import asyncio
+import os
+import pickle
 from typing import Optional
 
 import aiohttp
 import numpy as np
 import pandas as pd
-import asyncio
-import os
-import pickle
-
 from halo import Halo
 
 from mail_sanitizer.clients.gmail_client import GmailClient
-from mail_sanitizer.utils import get_mail_dump_path, get_prop_from_config
+from mail_sanitizer.utils import get_mail_dump_path
 
 
 def set_flatten(arr):
@@ -47,8 +46,7 @@ def _sanitize_un_sub_link(link):
 def collect_emails():
     # Create a mail dump with everything in existence
     gmail_client = GmailClient()
-    user_email = get_prop_from_config("email")
-    MailDumpOps.create_mail_dump("", user_email, gmail_client)
+    MailDumpOps.create_mail_dump("", 'me', gmail_client)
 
 
 class MailDumpOps:
